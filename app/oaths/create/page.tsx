@@ -1,5 +1,6 @@
 import { Navigation } from "@/components/navigation"
 import { OathForm } from "@/components/oath-form"
+import { OathAssistantChat } from "@/components/oath-chat"
 
 export default function CreateOathPage() {
   return (
@@ -16,6 +17,8 @@ export default function CreateOathPage() {
 
         <OathForm />
       </div>
+
+      <OathAssistantChat />
     </div>
   )
 }
