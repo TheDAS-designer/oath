@@ -25,6 +25,8 @@ interface OathFormData {
   tags: string[]
   deadlineType: "relative" | "absolute" | "permanent"
   deadlineDate: string
+  reviewIntervalUnit: "hours" | "days" | "weeks" | "months"
+  reviewIntervalValue: number
 }
 
 export function OathForm() {
@@ -38,21 +40,24 @@ export function OathForm() {
     tags: [],
     deadlineType: "relative",
     deadlineDate: "",
+    reviewIntervalUnit: "days",
+    reviewIntervalValue: 7,
   })
 
   const [tagInput, setTagInput] = useState("")
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [relativeUnit, setRelativeUnit] = useState<"days" | "weeks" | "months" | "years">("days")
 
   const categoryOptions = [
-    { value: OathCategory.PROJECT_COMMITMENT, label: "项目承诺", description: "Web3项目维护、更新承诺" },
-    { value: OathCategory.DELIVERY_SERVICE, label: "服务交付", description: "外卖配送、服务提供等" },
-    { value: OathCategory.BUSINESS_AGREEMENT, label: "商业承诺", description: "企业间合作、商业协议" },
-    { value: OathCategory.PERSONAL_GOAL, label: "个人目标", description: "个人成长、学习目标等" },
-    { value: OathCategory.COMMUNITY_SERVICE, label: "社区服务", description: "社区贡献、公益活动" },
-    { value: OathCategory.OTHER, label: "其他", description: "其他类型的承诺" },
+    { value: OathCategory.PROJECT_COMMITMENT, label: "Project Commitment", description: "Web3 project maintenance & updates" },
+    { value: OathCategory.DELIVERY_SERVICE, label: "Delivery / Service", description: "Food delivery, service provision, etc." },
+    { value: OathCategory.BUSINESS_AGREEMENT, label: "Business Agreement", description: "B2B collaboration, commercial agreements" },
+    { value: OathCategory.PERSONAL_GOAL, label: "Personal Goal", description: "Personal growth, learning goals" },
+    { value: OathCategory.COMMUNITY_SERVICE, label: "Community Service", description: "Community contribution, public good" },
+    { value: OathCategory.OTHER, label: "Other", description: "Other commitments" },
   ]
 
-  // 监听 AI 助手“应用到表单”事件
+  // Listen to AI assistant "apply to form" event
   useEffect(() => {
     function onApply(e: any) {
       const detail = e?.detail || {}
@@ -61,7 +66,28 @@ export function OathForm() {
         category: (detail.category as OathCategory) || prev.category,
         collateralAmount: typeof detail.usdt === "number" ? detail.usdt : prev.collateralAmount,
         swearAmount: typeof detail.oath === "number" ? detail.oath : prev.swearAmount,
+        // timeline fields
+        deadlineType: (detail.deadlineType as any) || prev.deadlineType,
+        duration: typeof detail.duration === "number" ? detail.duration : prev.duration,
+        deadlineDate: typeof detail.deadlineDate === "string" ? detail.deadlineDate : prev.deadlineDate,
+        reviewIntervalUnit: (detail.reviewIntervalUnit as any) || prev.reviewIntervalUnit,
+        reviewIntervalValue: typeof detail.reviewIntervalValue === "number" ? detail.reviewIntervalValue : prev.reviewIntervalValue,
       }))
+      if (typeof detail.title === "string" || typeof detail.description === "string" || Array.isArray(detail.tags)) {
+        setFormData((prev) => ({
+          ...prev,
+          title: typeof detail.title === "string" && detail.title ? detail.title : prev.title,
+          description: typeof detail.description === "string" && detail.description ? detail.description : prev.description,
+          tags: Array.isArray(detail.tags) && detail.tags.length > 0 ? Array.from(new Set([...(prev.tags || []), ...detail.tags])) : prev.tags,
+        }))
+      }
+      if (typeof detail.duration === "number") {
+        // keep UI unit based on reasonable scale
+        if (detail.duration % 365 === 0 && detail.duration / 365 <= 5) setRelativeUnit("years")
+        else if (detail.duration % 30 === 0 && detail.duration / 30 <= 24) setRelativeUnit("months")
+        else if (detail.duration % 7 === 0 && detail.duration / 7 <= 52) setRelativeUnit("weeks")
+        else setRelativeUnit("days")
+      }
     }
     window.addEventListener("oath.applyFromAI", onApply as any)
     return () => window.removeEventListener("oath.applyFromAI", onApply as any)
@@ -89,10 +115,10 @@ export function OathForm() {
     setIsSubmitting(true)
 
     try {
-      // TODO: 调用智能合约创建誓言
+      // TODO: call smart contract to create oath
       console.log("Creating oath:", formData)
 
-      // 模拟API调用
+      // simulate API
       await new Promise((resolve) => setTimeout(resolve, 2000))
 
       // 重置表单
@@ -108,18 +134,33 @@ export function OathForm() {
         deadlineDate: "",
       })
 
-      alert("誓言创建成功！正在等待AI分类和验证...")
+      alert("Oath created! Awaiting AI classification and initial verification...")
     } catch (error) {
       console.error("Error creating oath:", error)
-      alert("创建失败，请重试")
+      alert("Creation failed, please retry")
     } finally {
       setIsSubmitting(false)
     }
   }
 
-  // 1:1 比例：当任一边变动时，另一边自动跟随
+  // 1:1 ratio: keep synchronized
   const syncCollateral = (value: number) => {
     setFormData((prev) => ({ ...prev, collateralAmount: value, swearAmount: value }))
+  }
+
+  // Helper to map UI unit to duration(days)
+  const uiValueToDays = (value: number, unit: "days" | "weeks" | "months" | "years") => {
+    if (unit === "weeks") return value * 7
+    if (unit === "months") return value * 30
+    if (unit === "years") return value * 365
+    return value
+  }
+
+  const daysToUi = (days: number) => {
+    if (days % 365 === 0) return { value: days / 365, unit: "years" as const }
+    if (days % 30 === 0) return { value: days / 30, unit: "months" as const }
+    if (days % 7 === 0) return { value: days / 7, unit: "weeks" as const }
+    return { value: days, unit: "days" as const }
   }
 
   const totalCollateral = formData.collateralAmount + formData.swearAmount
@@ -131,45 +172,45 @@ export function OathForm() {
         <CardHeader>
           <CardTitle className="flex items-center space-x-2">
             <Shield className="h-6 w-6 text-blue-600" />
-            <span>创建新誓言</span>
+            <span>Create New Oath</span>
           </CardTitle>
-          <CardDescription>通过超额抵押创建可信的承诺，完成后获得信用NFT</CardDescription>
+          <CardDescription>Create a credible commitment with over-collateralization and mint a credit SBT when completed.</CardDescription>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-6">
             {/* 基本信息 */}
             <div className="space-y-4">
               <div>
-                <Label htmlFor="title">誓言标题 *</Label>
+                <Label htmlFor="title">Title *</Label>
                 <Input
                   id="title"
                   value={formData.title}
                   onChange={(e) => setFormData((prev) => ({ ...prev, title: e.target.value }))}
-                  placeholder="简洁明确地描述您的承诺"
+                  placeholder="Describe your commitment concisely"
                   className="mt-1"
                 />
               </div>
 
               <div>
-                <Label htmlFor="description">详细描述 *</Label>
+                <Label htmlFor="description">Detailed Description *</Label>
                 <Textarea
                   id="description"
                   value={formData.description}
                   onChange={(e) => setFormData((prev) => ({ ...prev, description: e.target.value }))}
-                  placeholder="详细说明您要完成的事情、时间节点、验证方式等"
+                  placeholder="Explain what to achieve, timelines, and verification approach"
                   rows={4}
                   className="mt-1"
                 />
               </div>
 
               <div>
-                <Label htmlFor="category">誓言类别 *</Label>
+                <Label htmlFor="category">Category *</Label>
                 <Select
                   value={formData.category}
                   onValueChange={(value) => setFormData((prev) => ({ ...prev, category: value as OathCategory }))}
                 >
                   <SelectTrigger className="mt-1">
-                    <SelectValue placeholder="选择誓言类别" />
+                    <SelectValue placeholder="Select a category" />
                   </SelectTrigger>
                   <SelectContent>
                     {categoryOptions.map((option) => (
@@ -189,45 +230,47 @@ export function OathForm() {
             <div className="space-y-4">
               <div className="flex items-center space-x-2">
                 <DollarSign className="h-5 w-5 text-green-600" />
-                <Label className="text-base font-semibold">抵押设置</Label>
+                <Label className="text-base font-semibold">Collateral Settings</Label>
               </div>
 
               <div className="grid md:grid-cols-2 gap-4">
                 <div>
-                  <Label htmlFor="collateral">稳定币抵押 (USDT) 与 SWEAR 1:1</Label>
+                  <Label htmlFor="collateral">Stablecoin (USDT) collateral with OATH 1:1</Label>
                   <div className="mt-2">
-                    <Slider
-                      value={[formData.collateralAmount]}
-                      onValueChange={([value]) => syncCollateral(value)}
-                      max={1000}
-                      min={10}
-                      step={10}
-                      className="mb-2"
+                    <Input
+                      id="collateral"
+                      type="number"
+                      inputMode="decimal"
+                      min={0}
+                      step={1}
+                      value={formData.collateralAmount}
+                      onChange={(e) => {
+                        const v = Number(e.target.value || 0)
+                        syncCollateral(Number.isFinite(v) ? v : 0)
+                      }}
+                      className="mb-1"
                     />
-                    <div className="flex justify-between text-sm text-slate-500">
-                      <span>$10</span>
-                      <span className="font-medium">${formData.collateralAmount}</span>
-                      <span>$1000</span>
-                    </div>
+                    <div className="text-xs text-slate-500">Any amount is allowed. OATH collateral mirrors 1:1.</div>
                   </div>
                 </div>
 
                 <div>
-                  <Label htmlFor="swear">SWEAR代币抵押 (自动同步)</Label>
+                  <Label htmlFor="oath">OATH token collateral (auto-synced)</Label>
                   <div className="mt-2">
-                    <Slider
-                      value={[formData.swearAmount]}
-                      onValueChange={([value]) => syncCollateral(value)}
-                      max={1000}
-                      min={10}
-                      step={10}
-                      className="mb-2"
+                    <Input
+                      id="oath"
+                      type="number"
+                      inputMode="decimal"
+                      min={0}
+                      step={1}
+                      value={formData.swearAmount}
+                      onChange={(e) => {
+                        const v = Number(e.target.value || 0)
+                        syncCollateral(Number.isFinite(v) ? v : 0)
+                      }}
+                      className="mb-1"
                     />
-                    <div className="flex justify-between text-sm text-slate-500">
-                      <span>10 SWEAR</span>
-                      <span className="font-medium">{formData.swearAmount} SWEAR</span>
-                      <span>1000 SWEAR</span>
-                    </div>
+                    <div className="text-xs text-slate-500">Mirrored 1:1 with USDT collateral.</div>
                   </div>
                 </div>
               </div>
@@ -235,7 +278,7 @@ export function OathForm() {
               <Alert>
                 <AlertCircle className="h-4 w-4" />
                 <AlertDescription>
-                  总抵押价值: <strong>${totalCollateral}</strong> (超额抵押确保承诺可信度)
+                  Total collateral value: <strong>${totalCollateral}</strong> (over-collateralization improves credibility)
                 </AlertDescription>
               </Alert>
             </div>
@@ -244,7 +287,7 @@ export function OathForm() {
             <div>
               <div className="flex items-center space-x-2 mb-3">
                 <Clock className="h-5 w-5 text-blue-600" />
-                <Label className="text-base font-semibold">完成期限</Label>
+                <Label className="text-base font-semibold">Deadline</Label>
               </div>
               <div className="space-y-3">
                 <div className="grid md:grid-cols-3 gap-3">
@@ -252,33 +295,51 @@ export function OathForm() {
                     type="button"
                     className={`border rounded-md px-3 py-2 text-sm ${formData.deadlineType === "relative" ? "border-blue-600 text-blue-700" : "border-slate-200"}`}
                     onClick={() => setFormData((p) => ({ ...p, deadlineType: "relative" }))}
-                  >相对天数</button>
+                  >Relative days</button>
                   <button
                     type="button"
                     className={`border rounded-md px-3 py-2 text-sm ${formData.deadlineType === "absolute" ? "border-blue-600 text-blue-700" : "border-slate-200"}`}
                     onClick={() => setFormData((p) => ({ ...p, deadlineType: "absolute" }))}
-                  >精确时间</button>
+                  >Exact date/time</button>
                   <button
                     type="button"
                     className={`border rounded-md px-3 py-2 text-sm ${formData.deadlineType === "permanent" ? "border-blue-600 text-blue-700" : "border-slate-200"}`}
                     onClick={() => setFormData((p) => ({ ...p, deadlineType: "permanent" }))}
-                  >永久</button>
+                  >Permanent</button>
                 </div>
 
                 {formData.deadlineType === "relative" ? (
-                  <div>
-                    <Slider
-                      value={[formData.duration]}
-                      onValueChange={([value]) => setFormData((prev) => ({ ...prev, duration: value }))}
-                      max={365}
-                      min={1}
-                      step={1}
-                      className="mb-2"
-                    />
+                  <div className="space-y-2">
+                    <div className="grid grid-cols-[1fr_auto] gap-2 items-center">
+                      <Slider
+                        value={[daysToUi(formData.duration).value]}
+                        onValueChange={([value]) => setFormData((prev) => ({ ...prev, duration: uiValueToDays(value, relativeUnit) }))}
+                        max={relativeUnit === "days" ? 365 : relativeUnit === "weeks" ? 52 : relativeUnit === "months" ? 24 : 5}
+                        min={1}
+                        step={1}
+                        className="mb-2"
+                      />
+                      <select
+                        className="border rounded px-2 py-1 text-sm"
+                        value={relativeUnit}
+                        onChange={(e) => {
+                          const unit = e.target.value as typeof relativeUnit
+                          setRelativeUnit(unit)
+                        }}
+                        aria-label="Relative time unit"
+                      >
+                        <option value="days">days</option>
+                        <option value="weeks">weeks</option>
+                        <option value="months">months</option>
+                        <option value="years">years</option>
+                      </select>
+                    </div>
                     <div className="flex justify-between text-sm text-slate-500">
-                      <span>1天</span>
-                      <span className="font-medium">{formData.duration}天</span>
-                      <span>365天</span>
+                      <span>1 {relativeUnit}</span>
+                      <span className="font-medium">{daysToUi(formData.duration).value} {relativeUnit}</span>
+                      <span>
+                        {relativeUnit === "days" ? 365 : relativeUnit === "weeks" ? 52 : relativeUnit === "months" ? 24 : 5} {relativeUnit}
+                      </span>
                     </div>
                   </div>
                 ) : null}
@@ -286,7 +347,7 @@ export function OathForm() {
                 {formData.deadlineType === "absolute" ? (
                   <div className="grid md:grid-cols-2 gap-3">
                     <div>
-                      <Label>精确日期时间</Label>
+                      <Label>Exact date & time</Label>
                       <Input
                         type="datetime-local"
                         value={formData.deadlineDate}
@@ -298,24 +359,49 @@ export function OathForm() {
                 ) : null}
 
                 {formData.deadlineType === "permanent" ? (
-                  <div className="text-sm text-slate-600">此誓言无固定截止时间，可随时由发起人声明完成并提交证据。</div>
+                  <div className="text-sm text-slate-600">This oath has no fixed deadline. The creator may submit completion at any time with evidence.</div>
                 ) : null}
               </div>
             </div>
 
             {/* 标签 */}
             <div>
-              <Label htmlFor="tags">标签 (便于分类和搜索)</Label>
+              <Label htmlFor="tags">Tags (for discovery)</Label>
               <div className="flex space-x-2 mt-1">
                 <Input
                   value={tagInput}
                   onChange={(e) => setTagInput(e.target.value)}
-                  placeholder="添加标签"
+                  placeholder="Add a tag"
                   onKeyPress={(e) => e.key === "Enter" && (e.preventDefault(), addTag())}
                 />
-                <Button type="button" variant="outline" onClick={addTag}>
-                  添加
-                </Button>
+                <Button type="button" variant="outline" onClick={addTag}>Add</Button>
+              </div>
+              {/* Monitoring review interval */}
+              <div className="grid md:grid-cols-2 gap-3 mt-4">
+                <div>
+                  <Label>Review interval</Label>
+                  <div className="flex gap-2 mt-1">
+                    <Input
+                      type="number"
+                      min={1}
+                      value={formData.reviewIntervalValue}
+                      onChange={(e) => setFormData((p) => ({ ...p, reviewIntervalValue: Number(e.target.value || 1) }))}
+                      className="w-28"
+                    />
+                    <select
+                      className="border rounded px-2 py-1 text-sm"
+                      value={formData.reviewIntervalUnit}
+                      onChange={(e) => setFormData((p) => ({ ...p, reviewIntervalUnit: e.target.value as any }))}
+                      aria-label="Review interval unit"
+                    >
+                      <option value="hours">hours</option>
+                      <option value="days">days</option>
+                      <option value="weeks">weeks</option>
+                      <option value="months">months</option>
+                    </select>
+                  </div>
+                  <div className="text-xs text-slate-500 mt-1">Arbitrators/AI will automatically review at this interval.</div>
+                </div>
               </div>
               {formData.tags.length > 0 && (
                 <div className="flex flex-wrap gap-2 mt-2">
@@ -339,12 +425,12 @@ export function OathForm() {
                 {isSubmitting ? (
                   <>
                     <Sparkles className="mr-2 h-5 w-5 animate-spin" />
-                    创建中...
+                    Creating...
                   </>
                 ) : (
                   <>
                     <Shield className="mr-2 h-5 w-5" />
-                    创建誓言
+                    Create Oath
                   </>
                 )}
               </Button>
