@@ -37,7 +37,7 @@ export function DiamondCaseCard({ diamondCase, onEndorse, showDetails = true }: 
   const [detailsModalOpen, setDetailsModalOpen] = useState(false)
 
   const formatDate = (date: Date) => {
-    return new Intl.DateTimeFormat("zh-CN", {
+    return new Intl.DateTimeFormat("en-US", {
       year: "numeric",
       month: "short",
       day: "numeric",
@@ -52,10 +52,10 @@ export function DiamondCaseCard({ diamondCase, onEndorse, showDetails = true }: 
   }
 
   const getCreditLevelText = (creditValue: number) => {
-    if (creditValue >= 10000) return "传奇"
-    if (creditValue >= 5000) return "史诗"
-    if (creditValue >= 1000) return "稀有"
-    return "普通"
+    if (creditValue >= 10000) return "Legendary"
+    if (creditValue >= 5000) return "Epic"
+    if (creditValue >= 1000) return "Rare"
+    return "Common"
   }
 
   const handleEndorse = () => {
@@ -116,9 +116,9 @@ export function DiamondCaseCard({ diamondCase, onEndorse, showDetails = true }: 
         
         <div className="flex items-center space-x-4 text-xs text-slate-500">
           {diamondCase.endorseCount !== undefined && (
-            <span>{diamondCase.endorseCount} 背书</span>
+            <span>{diamondCase.endorseCount} Endorsements</span>
           )}
-          <span>信用值: {diamondCase.creditValue.toLocaleString()}</span>
+          <span>Credit: {diamondCase.creditValue.toLocaleString()}</span>
         </div>
 
         {showDetails && (
@@ -129,7 +129,7 @@ export function DiamondCaseCard({ diamondCase, onEndorse, showDetails = true }: 
             onClick={() => setDetailsModalOpen(true)}
           >
             <Eye className="h-3 w-3 mr-1" />
-            查看详情
+            View Details
           </Button>
         )}
       </div>
@@ -151,7 +151,7 @@ export function DiamondCaseCard({ diamondCase, onEndorse, showDetails = true }: 
             </div>
             <DialogTitle className="text-xl mt-2">{diamondCase.title}</DialogTitle>
             <DialogDescription>
-              创建于 {formatDate(diamondCase.createdAt)}
+              Created on {formatDate(diamondCase.createdAt)}
             </DialogDescription>
           </DialogHeader>
           
@@ -169,12 +169,12 @@ export function DiamondCaseCard({ diamondCase, onEndorse, showDetails = true }: 
           
           <div className="space-y-4">
             <div>
-              <h3 className="font-medium text-slate-800 mb-1">案例描述</h3>
+              <h3 className="font-medium text-slate-800 mb-1">Description</h3>
               <p className="text-slate-700">{diamondCase.description}</p>
             </div>
             
             <div>
-              <h3 className="font-medium text-slate-800 mb-1">标签</h3>
+              <h3 className="font-medium text-slate-800 mb-1">Tags</h3>
               <div className="flex flex-wrap gap-2">
                 {diamondCase.tags.map((tag, index) => (
                   <Badge key={index} variant="secondary">{tag}</Badge>
@@ -184,11 +184,11 @@ export function DiamondCaseCard({ diamondCase, onEndorse, showDetails = true }: 
             
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <h3 className="text-sm font-medium text-slate-500">信用值</h3>
+                <h3 className="text-sm font-medium text-slate-500">Credit Value</h3>
                 <p className="font-medium text-green-600">{diamondCase.creditValue.toLocaleString()}</p>
               </div>
               <div>
-                <h3 className="text-sm font-medium text-slate-500">背书数量</h3>
+                <h3 className="text-sm font-medium text-slate-500">Endorsements</h3>
                 <p className="font-medium">{diamondCase.endorseCount || 0}</p>
               </div>
             </div>
@@ -196,14 +196,14 @@ export function DiamondCaseCard({ diamondCase, onEndorse, showDetails = true }: 
           
           <DialogFooter className="gap-2 sm:gap-0">
             <Button variant="outline" onClick={() => setDetailsModalOpen(false)}>
-              关闭
+              Close
             </Button>
             <Button onClick={() => {
               setDetailsModalOpen(false)
               setEndorseModalOpen(true)
             }}>
               <ShieldCheck className="h-4 w-4 mr-2" />
-              信任背书
+              Trust Endorse
             </Button>
           </DialogFooter>
         </DialogContent>
@@ -213,15 +213,15 @@ export function DiamondCaseCard({ diamondCase, onEndorse, showDetails = true }: 
       <Dialog open={endorseModalOpen} onOpenChange={setEndorseModalOpen}>
         <DialogContent className="sm:max-w-[425px]">
           <DialogHeader>
-            <DialogTitle>信任背书</DialogTitle>
+            <DialogTitle>Trust Endorsement</DialogTitle>
             <DialogDescription>
-              使用您的信用钻石背书此誓言，表示您对该誓言的信任和支持。
+              Use your credit diamond to endorse this oath, showing your trust and support for this commitment.
             </DialogDescription>
           </DialogHeader>
           
           <div className="grid gap-4 py-4">
             <div>
-              <h4 className="font-medium mb-2">目标誓言</h4>
+              <h4 className="font-medium mb-2">Target Oath</h4>
               <div className="flex items-center space-x-2">
                 <Badge className={`${
                   creditLevel >= 4 ? "bg-purple-100 text-purple-800" :
@@ -231,50 +231,50 @@ export function DiamondCaseCard({ diamondCase, onEndorse, showDetails = true }: 
                 }`}>{getCreditLevelText(diamondCase.creditValue)}</Badge>
                 <span className="font-medium">{diamondCase.title}</span>
               </div>
-              <p className="text-sm text-slate-500 mt-1">信用值: {diamondCase.creditValue}</p>
+              <p className="text-sm text-slate-500 mt-1">Credit Value: {diamondCase.creditValue}</p>
             </div>
             
             <div className="space-y-2">
               <label htmlFor="endorsement" className="text-sm font-medium">
-                选择用于背书的信用钻石
+                Select Credit Diamond for Endorsement
               </label>
               <Select>
                 <SelectTrigger>
-                  <SelectValue placeholder="选择您的信用钻石" />
+                  <SelectValue placeholder="Select your credit diamond" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="diamond1">Web3开发专家 (信用值: 5000)</SelectItem>
-                  <SelectItem value="diamond2">社区管理者 (信用值: 1200)</SelectItem>
+                  <SelectItem value="diamond1">Web3 Developer Expert (Credit: 5000)</SelectItem>
+                  <SelectItem value="diamond2">Community Manager (Credit: 1200)</SelectItem>
                 </SelectContent>
               </Select>
             </div>
             
             <div className="space-y-2">
               <label htmlFor="amount" className="text-sm font-medium">
-                背书信用量
+                Endorsement Credit Amount
               </label>
               <Input
                 id="amount"
                 type="number"
                 min={1}
-                placeholder="输入您愿意背书的信用量"
+                placeholder="Enter credit amount to endorse"
               />
               <p className="text-xs text-slate-500">
-                可用信用: 5000
+                Available Credit: 5000
               </p>
             </div>
           </div>
           
           <DialogFooter>
             <Button variant="outline" onClick={() => setEndorseModalOpen(false)}>
-              取消
+              Cancel
             </Button>
             <Button 
               onClick={handleEndorse}
               className="ml-2"
             >
               <ShieldCheck className="h-4 w-4 mr-2" />
-              确认背书
+              Confirm Endorse
             </Button>
           </DialogFooter>
         </DialogContent>

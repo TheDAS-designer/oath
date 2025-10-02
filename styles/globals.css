@@ -121,3 +121,100 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Oath Platform Custom Styles */
+.oath-gradient {
+  background: linear-gradient(135deg, #1e3a8a 0%, #0f766e 100%);
+}
+
+.oath-text-gradient {
+  background: linear-gradient(135deg, #1e3a8a 0%, #d97706 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.oath-shadow {
+  box-shadow: 
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06),
+    0 1px 0px 0px rgba(255, 255, 255, 0.05) inset;
+}
+
+.oath-card-hover {
+  transition: all 0.3s ease;
+}
+
+.oath-card-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: 
+    0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.oath-shimmer {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.2) 20%,
+    rgba(255, 255, 255, 0.5) 60%,
+    rgba(255, 255, 255, 0)
+  );
+  background-size: 200% auto;
+  animation: shimmer 2s linear infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* Glass morphism effect */
+.oath-glass {
+  background: rgba(255, 255, 255, 0.1);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Oath Wall brick texture background */
+.oath-wall-bg {
+  background-image: 
+    linear-gradient(45deg, rgba(0,0,0,0.1) 25%, transparent 25%), 
+    linear-gradient(-45deg, rgba(0,0,0,0.1) 25%, transparent 25%), 
+    linear-gradient(45deg, transparent 75%, rgba(0,0,0,0.1) 75%), 
+    linear-gradient(-45deg, transparent 75%, rgba(0,0,0,0.1) 75%);
+  background-size: 20px 20px;
+  background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+  background-color: #f8fafc;
+}
+
+.oath-wall-texture {
+  background-image: 
+    radial-gradient(circle at 25% 25%, rgba(255,255,255,0.2) 1px, transparent 1px),
+    radial-gradient(circle at 75% 75%, rgba(0,0,0,0.1) 1px, transparent 1px),
+    linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 50%, #cbd5e1 100%);
+  background-size: 30px 30px, 30px 30px, 100% 100%;
+}
+
+.oath-brick-pattern {
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 35px,
+      rgba(255,255,255,0.1) 35px,
+      rgba(255,255,255,0.1) 37px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      rgba(248,250,252,1),
+      rgba(248,250,252,1) 60px,
+      rgba(226,232,240,0.5) 60px,
+      rgba(226,232,240,0.5) 62px
+    );
+}

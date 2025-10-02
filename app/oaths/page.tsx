@@ -120,7 +120,7 @@ export default function OathsPage() {
           <div className="flex justify-center items-center h-64">
             <div className="text-center">
               <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
-              <p className="text-slate-600">加载誓言列表中...</p>
+              <p className="text-slate-600">Loading oath list...</p>
             </div>
           </div>
         </div>
@@ -136,13 +136,13 @@ export default function OathsPage() {
         {/* 页面标题和操作 */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
           <div>
-            <h1 className="font-serif text-3xl font-bold text-slate-900 mb-2">誓言广场</h1>
-            <p className="text-slate-600">浏览所有公开的誓言，见证承诺的力量</p>
+            <h1 className="font-serif text-3xl font-bold text-slate-900 mb-2">Oath Plaza</h1>
+            <p className="text-slate-600">Browse all public oaths and witness the power of commitment</p>
           </div>
           <Button asChild className="mt-4 md:mt-0 oath-gradient text-white hover:opacity-90">
             <Link href="/oaths/create">
               <Plus className="h-5 w-5 mr-2" />
-              创建誓言
+              Create Oath
             </Link>
           </Button>
         </div>
@@ -151,21 +151,21 @@ export default function OathsPage() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
           <div className="text-center p-4 bg-white rounded-lg oath-shadow">
             <div className="text-2xl font-bold text-blue-600">{oaths.length}</div>
-            <div className="text-sm text-slate-500">总誓言数</div>
+            <div className="text-sm text-slate-500">Total Oaths</div>
           </div>
           <div className="text-center p-4 bg-white rounded-lg oath-shadow">
             <div className="text-2xl font-bold text-green-600">{getStatusCount(OathStatus.ACTIVE)}</div>
-            <div className="text-sm text-slate-500">进行中</div>
+            <div className="text-sm text-slate-500">Active</div>
           </div>
           <div className="text-center p-4 bg-white rounded-lg oath-shadow">
             <div className="text-2xl font-bold text-amber-600">{getStatusCount(OathStatus.COMPLETED)}</div>
-            <div className="text-sm text-slate-500">已完成</div>
+            <div className="text-sm text-slate-500">Completed</div>
           </div>
           <div className="text-center p-4 bg-white rounded-lg oath-shadow">
             <div className="text-2xl font-bold text-slate-600">
               ${oaths.reduce((sum, oath) => sum + oath.collateralAmount + oath.swearAmount, 0).toLocaleString()}
             </div>
-            <div className="text-sm text-slate-500">总抵押额</div>
+            <div className="text-sm text-slate-500">Total Collateral</div>
           </div>
         </div>
 
@@ -174,7 +174,7 @@ export default function OathsPage() {
           <div className="relative flex-1">
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-slate-400" />
             <Input
-              placeholder="搜索誓言标题、描述或标签..."
+              placeholder="Search oath title, description or tags..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               className="pl-10"
@@ -183,28 +183,28 @@ export default function OathsPage() {
 
           <Select value={statusFilter} onValueChange={setStatusFilter}>
             <SelectTrigger className="w-full md:w-40">
-              <SelectValue placeholder="状态筛选" />
+              <SelectValue placeholder="Filter by Status" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="all">全部状态</SelectItem>
-              <SelectItem value={OathStatus.ACTIVE}>进行中</SelectItem>
-              <SelectItem value={OathStatus.COMPLETED}>已完成</SelectItem>
-              <SelectItem value={OathStatus.FAILED}>已失败</SelectItem>
-              <SelectItem value={OathStatus.DISPUTED}>争议中</SelectItem>
+              <SelectItem value="all">All Status</SelectItem>
+              <SelectItem value={OathStatus.ACTIVE}>Active</SelectItem>
+              <SelectItem value={OathStatus.COMPLETED}>Completed</SelectItem>
+              <SelectItem value={OathStatus.FAILED}>Failed</SelectItem>
+              <SelectItem value={OathStatus.DISPUTED}>Disputed</SelectItem>
             </SelectContent>
           </Select>
 
           <Select value={categoryFilter} onValueChange={setCategoryFilter}>
             <SelectTrigger className="w-full md:w-40">
-              <SelectValue placeholder="类别筛选" />
+              <SelectValue placeholder="Filter by Category" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="all">全部类别</SelectItem>
-              <SelectItem value={OathCategory.PROJECT_COMMITMENT}>项目承诺</SelectItem>
-              <SelectItem value={OathCategory.SERVICE_DELIVERY}>服务交付</SelectItem>
-              <SelectItem value={OathCategory.BUSINESS_PROMISE}>商业承诺</SelectItem>
-              <SelectItem value={OathCategory.PERSONAL_GOAL}>个人目标</SelectItem>
-              <SelectItem value={OathCategory.COMMUNITY_SERVICE}>社区服务</SelectItem>
+              <SelectItem value="all">All Categories</SelectItem>
+              <SelectItem value={OathCategory.PROJECT_COMMITMENT}>Project Commitment</SelectItem>
+              <SelectItem value={OathCategory.SERVICE_DELIVERY}>Service Delivery</SelectItem>
+              <SelectItem value={OathCategory.BUSINESS_PROMISE}>Business Promise</SelectItem>
+              <SelectItem value={OathCategory.PERSONAL_GOAL}>Personal Goal</SelectItem>
+              <SelectItem value={OathCategory.COMMUNITY_SERVICE}>Community Service</SelectItem>
             </SelectContent>
           </Select>
         </div>
@@ -214,17 +214,17 @@ export default function OathsPage() {
           <div className="flex flex-wrap gap-2 mb-6">
             {searchTerm && (
               <Badge variant="secondary" className="cursor-pointer" onClick={() => setSearchTerm("")}>
-                搜索: {searchTerm} ×
+                Search: {searchTerm} ×
               </Badge>
             )}
             {statusFilter !== "all" && (
               <Badge variant="secondary" className="cursor-pointer" onClick={() => setStatusFilter("all")}>
-                状态: {statusFilter} ×
+                Status: {statusFilter} ×
               </Badge>
             )}
             {categoryFilter !== "all" && (
               <Badge variant="secondary" className="cursor-pointer" onClick={() => setCategoryFilter("all")}>
-                类别: {categoryFilter} ×
+                Category: {categoryFilter} ×
               </Badge>
             )}
           </div>
@@ -234,10 +234,10 @@ export default function OathsPage() {
         {filteredOaths.length === 0 ? (
           <div className="text-center py-12">
             <Filter className="h-12 w-12 text-slate-300 mx-auto mb-4" />
-            <h3 className="text-lg font-medium text-slate-900 mb-2">没有找到匹配的誓言</h3>
-            <p className="text-slate-500 mb-4">尝试调整搜索条件或创建新的誓言</p>
+            <h3 className="text-lg font-medium text-slate-900 mb-2">No matching oaths found</h3>
+            <p className="text-slate-500 mb-4">Try adjusting search criteria or create a new oath</p>
             <Button asChild variant="outline">
-              <Link href="/oaths/create">创建第一个誓言</Link>
+              <Link href="/oaths/create">Create First Oath</Link>
             </Button>
           </div>
         ) : (

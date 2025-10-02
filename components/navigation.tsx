@@ -10,12 +10,12 @@ export function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   const navItems = [
-    { href: "/oaths", label: "创建誓言", icon: Shield },
-    { href: "/arbitrate", label: "仲裁中心", icon: Gavel },
-    { href: "/trust-diamond", label: "信用钻石", icon: Trophy },
-    { href: "/diamond-cases", label: "案例库", icon: Sparkles },
-    { href: "/reports", label: "举报监督", icon: AlertTriangle },
-    { href: "/profile", label: "个人中心", icon: User },
+    { href: "/oaths", label: "Create Oath", icon: Shield },
+    { href: "/arbitrate", label: "Arbitration", icon: Gavel },
+    { href: "/trust-diamond", label: "Trust Diamond", icon: Trophy },
+    { href: "/diamond-cases", label: "Oath Wall", icon: Sparkles },
+    { href: "/reports", label: "Reports", icon: AlertTriangle },
+    { href: "/profile", label: "Profile", icon: User },
   ]
 
   return (
@@ -25,11 +25,11 @@ export function Navigation() {
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2">
             <div className="flex h-10 w-10 items-center justify-center rounded-lg oath-gradient">
-              <Sparkles className="h-6 w-6 text-white" />
+              <Shield className="h-6 w-6 text-white" />
             </div>
             <div className="flex flex-col">
               <span className="font-serif text-xl font-bold oath-text-gradient">Oath</span>
-              <span className="text-xs text-slate-500">誓言平台</span>
+              <span className="text-xs text-slate-500">Trust Platform</span>
             </div>
           </Link>
 
@@ -52,10 +52,10 @@ export function Navigation() {
 
           {/* Connect Wallet Button */}
           <div className="hidden md:flex items-center space-x-4">
-            <Badge variant="outline" className="text-green-700 border-green-200">
-              信用分: 0
+            <Badge variant="outline" className="text-green-700 border-green-200 bg-green-50">
+              Credit: 0
             </Badge>
-            <Button className="oath-gradient text-white hover:opacity-90">连接钱包</Button>
+            <Button className="oath-gradient text-white hover:opacity-90 shadow-lg">Connect Wallet</Button>
           </div>
 
           {/* Mobile Menu Button */}
@@ -84,11 +84,11 @@ export function Navigation() {
               })}
               <div className="pt-4 border-t">
                 <div className="flex items-center justify-between px-3 py-2">
-                  <Badge variant="outline" className="text-green-700 border-green-200">
-                    信用分: 0
+                  <Badge variant="outline" className="text-green-700 border-green-200 bg-green-50">
+                    Credit: 0
                   </Badge>
-                  <Button size="sm" className="oath-gradient text-white hover:opacity-90">
-                    连接钱包
+                  <Button size="sm" className="oath-gradient text-white hover:opacity-90 shadow-lg">
+                    Connect Wallet
                   </Button>
                 </div>
               </div>

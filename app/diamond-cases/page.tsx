@@ -9,17 +9,17 @@ import { Button } from "@/components/ui/button"
 import { Search, Filter, Sparkles } from "lucide-react"
 import { DiamondCaseCard, DiamondCase } from "@/components/diamond-case-card"
 
-// 创建案例数据
+// Create case data for Oath Wall
 const diamondCases: DiamondCase[] = [
-  // 誓言项目自己的案例 - 使用the_best_big_diamond.glb
+  // Oath platform case - using the_best_big_diamond.glb
   {
     id: "oath-platform",
-    title: "誓言平台 - 链上信用的缔造者",
-    description: "誓言平台通过区块链技术构建去中心化的信用体系，让人们通过发誓这一举动建立信任。平台支持超额抵押机制，并通过信用钻石NFT展示和传递信任，实现链上原生的信用体系。",
+    title: "Oath Platform - The Builder of On-Chain Credit",
+    description: "Oath platform builds a decentralized credit system through blockchain technology, allowing people to establish trust through oath-making. The platform supports over-collateralization mechanism and displays trust through credit diamond SBTs, achieving a native on-chain credit system.",
     modelPath: "/resouce/diamond/the_best_big_diamond.glb",
     creditValue: 50000,
-    category: "平台项目",
-    tags: ["区块链", "信用体系", "去中心化", "誓言", "信任"],
+    category: "Platform Project",
+    tags: ["blockchain", "credit system", "decentralized", "oath", "trust"],
     backgroundColor: "#081730",
     lightColor: "#4d7cfe",
     rotationSpeed: 0.005,
@@ -27,65 +27,63 @@ const diamondCases: DiamondCase[] = [
     endorseCount: 1258
   },
   
-  // 为现有的3个案例选择合适的模型
-  // 案例1: DeFi项目维护大师 - 使用brilliand_diamond.glb
+  // PumpFun Meme Token Creator Oath
   {
-    id: "defi-master",
-    title: "DeFi项目维护大师",
-    description: "成功维护DeFi项目2年，展现了卓越的项目管理能力和技术实力。通过誓言承诺长期维护，确保项目的安全性和稳定性，获得了社区的高度信任。",
+    id: "pumpfun-meme-creator",
+    title: "PumpFun Meme Creator - No Dump Before Graduation",
+    description: "I solemnly swear not to sell any of my meme token allocation before it graduates from PumpFun. This commitment ensures fair price discovery and prevents rug pulls, building trust with early supporters and community members.",
     modelPath: "/resouce/diamond/brilliand_diamond.glb",
-    creditValue: 15000,
-    category: "项目承诺",
-    tags: ["DeFi", "项目维护", "技术", "长期承诺"],
+    creditValue: 25000,
+    category: "DeFi Promise",
+    tags: ["PumpFun", "meme token", "no dump", "graduation", "community trust"],
     backgroundColor: "#1a0b2e",
     lightColor: "#9333ea",
     rotationSpeed: 0.01,
-    createdAt: new Date("2024-01-20"),
-    endorseCount: 347
+    createdAt: new Date("2024-12-15"),
+    endorseCount: 892
   },
   
-  // 案例2: 安全审计专家 - 使用faceted_diamond_or_brilliant.glb
+  // Morpho Fund Manager APY Guarantee
   {
-    id: "audit-expert",
-    title: "安全审计专家",
-    description: "高质量完成智能合约安全审计，保障了项目的安全性。通过专业的安全审计技能和经验，帮助多个项目识别并修复潜在的安全漏洞，建立了良好的专业信誉。",
-    modelPath: "/resouce/diamond/faceted_diamond_or_brilliant.glb",
-    creditValue: 2500,
-    category: "商业承诺",
-    tags: ["安全审计", "智能合约", "漏洞检测", "专业服务"],
+    id: "morpho-fund-manager",
+    title: "Morpho Fund Manager - 12% Monthly APY Guarantee",
+    description: "As a certified fund manager on Morpho protocol, I commit to maintaining a minimum 12% APY for all depositors this month. My strategy involves optimized lending/borrowing across multiple pools with risk management protocols in place.",
+    modelPath: "/resouce/diamond/magic_diamond.glb",
+    creditValue: 100000,
+    category: "DeFi Strategy",
+    tags: ["Morpho", "fund management", "APY guarantee", "yield farming", "risk management"],
     backgroundColor: "#001e3c",
     lightColor: "#3b82f6",
     rotationSpeed: 0.015,
-    createdAt: new Date("2024-12-01"),
-    endorseCount: 89
+    createdAt: new Date("2024-12-20"),
+    endorseCount: 234
   },
   
-  // 案例3: 配送服务之星 - 使用green_diamond.glb
+  // Chainlink Oracle Data Provider Reliability Oath
   {
-    id: "delivery-star",
-    title: "配送服务之星",
-    description: "连续30天准时完成外卖配送，获得客户一致好评。通过誓言承诺高质量的配送服务，并通过实际行动兑现承诺，建立了良好的服务信誉。",
-    modelPath: "/resouce/diamond/green_diamond.glb",
-    creditValue: 500,
-    category: "服务交付",
-    tags: ["外卖配送", "准时", "服务质量", "客户满意度"],
+    id: "chainlink-oracle-provider",
+    title: "Chainlink Oracle - 99.9% Uptime Commitment",
+    description: "As a Chainlink oracle data provider, I pledge to maintain 99.9% uptime and accurate price feeds for the next 6 months. This commitment is crucial for DeFi protocols depending on reliable price data for liquidations and trading.",
+    modelPath: "/resouce/diamond/diamond_simple_but_nice2.glb",
+    creditValue: 75000,
+    category: "Infrastructure",
+    tags: ["Chainlink", "oracle", "data reliability", "uptime", "DeFi infrastructure"],
     backgroundColor: "#052e16",
     lightColor: "#22c55e",
     rotationSpeed: 0.02,
-    createdAt: new Date("2024-11-15"),
-    endorseCount: 42
+    createdAt: new Date("2024-12-18"),
+    endorseCount: 456
   },
   
-  // 其他代表性案例
-  // 案例4: 去中心化公证服务 - 使用diamond_blue_multi-faceted.glb
+  // Decentralized Notary Service
   {
     id: "decentralized-notary",
-    title: "去中心化公证服务",
-    description: "提供去中心化的公证服务，通过区块链技术确保文件的真实性和时间戳。替代传统公证处，提供更高效、透明的公证服务，降低了公证成本和时间。",
+    title: "Decentralized Notary Service",
+    description: "Providing decentralized notary services through blockchain technology to ensure document authenticity and timestamps. Replacing traditional notary offices with more efficient, transparent services, reducing notarization costs and time.",
     modelPath: "/resouce/diamond/diamond_blue_multi-faceted.glb",
     creditValue: 8000,
-    category: "公共服务",
-    tags: ["公证", "区块链", "文件认证", "去中心化政务"],
+    category: "Public Service",
+    tags: ["notary", "blockchain", "document verification", "decentralized governance"],
     backgroundColor: "#0c4a6e",
     lightColor: "#0ea5e9",
     rotationSpeed: 0.008,
@@ -93,7 +91,7 @@ const diamondCases: DiamondCase[] = [
     endorseCount: 203
   },
   
-  // 案例5: 身份证办理专家 - 使用blue_colored_realistic_diamond_model.glb
+  // ID Service Expert
   {
     id: "id-service-expert",
     title: "身份证办理专家",
@@ -109,15 +107,15 @@ const diamondCases: DiamondCase[] = [
     endorseCount: 156
   },
   
-  // 案例6: 去中心化婚姻登记 - 使用rough_diamond_ring.glb
+  // Decentralized Marriage Registration
   {
     id: "decentralized-marriage",
-    title: "去中心化婚姻登记",
-    description: "提供基于区块链的婚姻登记服务，让婚姻契约更加透明和可靠。通过智能合约记录婚姻状态，提供更灵活、更现代的婚姻关系管理方式。",
+    title: "Decentralized Marriage Registration",
+    description: "Providing blockchain-based marriage registration services to make marriage contracts more transparent and reliable. Recording marriage status through smart contracts, offering more flexible and modern relationship management.",
     modelPath: "/resouce/diamond/rough_diamond_ring.glb",
     creditValue: 7500,
-    category: "婚姻服务",
-    tags: ["婚姻", "区块链", "智能合约", "去中心化"],
+    category: "Marriage Service",
+    tags: ["marriage", "blockchain", "smart contract", "decentralized"],
     backgroundColor: "#831843",
     lightColor: "#ec4899",
     rotationSpeed: 0.007,
@@ -125,15 +123,15 @@ const diamondCases: DiamondCase[] = [
     endorseCount: 289
   },
   
-  // 案例7: 社区医疗服务 - 使用diamond_green.glb
+  // Community Healthcare Service
   {
     id: "community-healthcare",
-    title: "社区医疗服务",
-    description: "提供社区基础医疗服务，包括健康咨询、基础诊断和用药指导。通过誓言承诺专业的医疗服务，让更多人能够便捷地获得基础医疗帮助。",
+    title: "Community Healthcare Service",
+    description: "Providing community-based primary healthcare services including health consultation, basic diagnosis and medication guidance. Committed through oath to professional medical services, enabling more people to conveniently access basic healthcare assistance.",
     modelPath: "/resouce/diamond/diamond_green.glb",
     creditValue: 6000,
-    category: "医疗服务",
-    tags: ["医疗", "社区服务", "健康咨询", "基础诊断"],
+    category: "Healthcare Service",
+    tags: ["healthcare", "community service", "health consultation", "basic diagnosis"],
     backgroundColor: "#064e3b",
     lightColor: "#10b981",
     rotationSpeed: 0.009,
@@ -141,15 +139,15 @@ const diamondCases: DiamondCase[] = [
     endorseCount: 178
   },
   
-  // 案例8: 教育辅导专家 - 使用diamond_ordinary.glb
+  // Education Tutoring Expert
   {
     id: "education-tutor",
-    title: "教育辅导专家",
-    description: "提供高质量的教育辅导服务，帮助学生提高学习成绩和能力。通过誓言承诺专业、耐心的教学，建立了良好的教育信誉。",
+    title: "Education Tutoring Expert",
+    description: "Providing high-quality educational tutoring services to help students improve their academic performance and abilities. Committed through oath to professional and patient teaching, establishing excellent educational reputation.",
     modelPath: "/resouce/diamond/diamond_ordinary.glb",
     creditValue: 2800,
-    category: "教育服务",
-    tags: ["教育", "辅导", "学习提升", "知识传递"],
+    category: "Education Service",
+    tags: ["education", "tutoring", "learning improvement", "knowledge transfer"],
     backgroundColor: "#0f172a",
     lightColor: "#6366f1",
     rotationSpeed: 0.012,
@@ -157,15 +155,15 @@ const diamondCases: DiamondCase[] = [
     endorseCount: 92
   },
   
-  // 案例9: 环保项目倡导者 - 使用diamond_rock.glb
+  // Environmental Project Advocate
   {
     id: "environmental-advocate",
-    title: "环保项目倡导者",
-    description: "发起并维护环保项目，促进社区可持续发展。通过誓言承诺长期投入环保事业，组织社区活动，提高环保意识，实现更绿色的生活方式。",
+    title: "Environmental Project Advocate",
+    description: "Initiating and maintaining environmental projects to promote sustainable community development. Committed through oath to long-term investment in environmental causes, organizing community activities, raising environmental awareness, and achieving greener lifestyle.",
     modelPath: "/resouce/diamond/diamond_rock.glb",
     creditValue: 4500,
-    category: "环保项目",
-    tags: ["环保", "可持续发展", "社区活动", "绿色生活"],
+    category: "Environmental Project",
+    tags: ["environment", "sustainability", "community activities", "green living"],
     backgroundColor: "#14532d",
     lightColor: "#22c55e",
     rotationSpeed: 0.006,
@@ -173,15 +171,15 @@ const diamondCases: DiamondCase[] = [
     endorseCount: 134
   },
   
-  // 案例10: 区块链开发专家 - 使用diamond_simple_but_nice.glb
+  // Blockchain Development Expert
   {
     id: "blockchain-developer",
-    title: "区块链开发专家",
-    description: "提供专业的区块链开发服务，包括智能合约编写、DApp开发和区块链集成。通过誓言承诺高质量的开发交付，帮助项目实现区块链技术的应用。",
+    title: "Blockchain Development Expert",
+    description: "Providing professional blockchain development services including smart contract programming, DApp development and blockchain integration. Committed through oath to high-quality development delivery, helping projects implement blockchain technology applications.",
     modelPath: "/resouce/diamond/diamond_simple_but_nice.glb",
     creditValue: 9000,
-    category: "技术服务",
-    tags: ["区块链", "开发", "智能合约", "DApp"],
+    category: "Tech Service",
+    tags: ["blockchain", "development", "smart contract", "DApp"],
     backgroundColor: "#0f172a",
     lightColor: "#8b5cf6",
     rotationSpeed: 0.01,
@@ -189,15 +187,15 @@ const diamondCases: DiamondCase[] = [
     endorseCount: 215
   },
   
-  // 案例11: 社区治理参与者 - 使用diamond_simple_but_nice2.glb
+  // Community Governance Participant
   {
     id: "community-governance",
-    title: "社区治理参与者",
-    description: "积极参与DAO社区治理，提供建设性意见和方案。通过誓言承诺公正、客观的治理参与，促进社区的健康发展和决策透明度。",
+    title: "Community Governance Participant",
+    description: "Actively participating in DAO community governance, providing constructive opinions and proposals. Committed through oath to fair and objective governance participation, promoting healthy community development and decision transparency.",
     modelPath: "/resouce/diamond/diamond_simple_but_nice2.glb",
     creditValue: 3200,
-    category: "社区治理",
-    tags: ["DAO", "治理", "社区决策", "透明度"],
+    category: "Community Governance",
+    tags: ["DAO", "governance", "community decisions", "transparency"],
     backgroundColor: "#1e1b4b",
     lightColor: "#818cf8",
     rotationSpeed: 0.011,
@@ -205,15 +203,15 @@ const diamondCases: DiamondCase[] = [
     endorseCount: 87
   },
   
-  // 案例12: 去中心化法律咨询 - 使用diamond_simple.glb
+  // Decentralized Legal Consultation
   {
     id: "decentralized-legal",
-    title: "去中心化法律咨询",
-    description: "提供基础的法律咨询服务，帮助人们了解法律知识和权益保护。通过誓言承诺专业、准确的法律建议，降低了法律服务的门槛和成本。",
+    title: "Decentralized Legal Consultation",
+    description: "Providing basic legal consultation services to help people understand legal knowledge and rights protection. Committed through oath to professional and accurate legal advice, reducing the barriers and costs of legal services.",
     modelPath: "/resouce/diamond/diamond_simple.glb",
     creditValue: 5500,
-    category: "法律服务",
-    tags: ["法律", "咨询", "权益保护", "专业建议"],
+    category: "Legal Service",
+    tags: ["legal", "consultation", "rights protection", "professional advice"],
     backgroundColor: "#1e293b",
     lightColor: "#f59e0b",
     rotationSpeed: 0.009,
@@ -221,15 +219,15 @@ const diamondCases: DiamondCase[] = [
     endorseCount: 143
   },
   
-  // 案例13: 艺术创作者信用 - 使用diamond_simple_3.glb
+  // Art Creator Credit
   {
     id: "art-creator",
-    title: "艺术创作者信用",
-    description: "承诺原创艺术作品创作，确保作品的真实性和独特性。通过誓言承诺不侵犯他人知识产权，提供真实的艺术创作，建立创作者的信誉。",
+    title: "Art Creator Credit",
+    description: "Committed to original artwork creation, ensuring authenticity and uniqueness of works. Pledged through oath not to infringe on others' intellectual property, providing genuine artistic creation and establishing creator reputation.",
     modelPath: "/resouce/diamond/diamond_simple_3.glb",
     creditValue: 2000,
-    category: "艺术创作",
-    tags: ["艺术", "原创", "创作", "知识产权"],
+    category: "Art Creation",
+    tags: ["art", "original", "creation", "intellectual property"],
     backgroundColor: "#422006",
     lightColor: "#f59e0b",
     rotationSpeed: 0.014,
@@ -237,15 +235,15 @@ const diamondCases: DiamondCase[] = [
     endorseCount: 76
   },
   
-  // 案例14: 去中心化房产交易 - 使用 5_diamond_combination.glb
+  // Decentralized Real Estate Trading
   {
     id: "decentralized-realestate",
-    title: "去中心化房产交易",
-    description: "提供基于区块链的房产交易服务，确保交易的安全性和透明度。通过誓言承诺真实、可靠的房产信息和交易流程，降低了房产交易的风险和成本。",
+    title: "Decentralized Real Estate Trading",
+    description: "Providing blockchain-based real estate trading services to ensure transaction security and transparency. Committed through oath to authentic and reliable property information and trading processes, reducing risks and costs of real estate transactions.",
     modelPath: "/resouce/diamond/5_diamond_combination.glb",
     creditValue: 12000,
-    category: "房产服务",
-    tags: ["房产", "区块链", "交易", "透明度"],
+    category: "Real Estate Service",
+    tags: ["real estate", "blockchain", "trading", "transparency"],
     backgroundColor: "#0f172a",
     lightColor: "#06b6d4",
     rotationSpeed: 0.008,
@@ -253,15 +251,15 @@ const diamondCases: DiamondCase[] = [
     endorseCount: 267
   },
   
-  // 案例15: 社区食品安全监督 - 使用 4_combination_white_diamond.glb
+  // Community Food Safety Supervision
   {
     id: "food-safety",
-    title: "社区食品安全监督",
-    description: "提供社区食品安全监督服务，确保食品的质量和安全。通过誓言承诺公正、严格的食品安全检查，保障社区居民的健康和安全。",
+    title: "Community Food Safety Supervision",
+    description: "Providing community food safety supervision services to ensure food quality and safety. Committed through oath to fair and strict food safety inspections, protecting community residents' health and safety.",
     modelPath: "/resouce/diamond/4_combination_white_diamond.glb",
     creditValue: 4200,
-    category: "安全服务",
-    tags: ["食品安全", "社区监督", "健康保障", "质量检查"],
+    category: "Safety Service",
+    tags: ["food safety", "community supervision", "health protection", "quality inspection"],
     backgroundColor: "#0f766e",
     lightColor: "#14b8a6",
     rotationSpeed: 0.01,
@@ -344,7 +342,7 @@ export default function DiamondCasesPage() {
           <div className="flex justify-center items-center h-64">
             <div className="text-center">
               <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
-              <p className="text-slate-600">加载信用钻石案例中...</p>
+              <p className="text-slate-600">Loading oath wall...</p>
             </div>
           </div>
         </div>
@@ -353,15 +351,15 @@ export default function DiamondCasesPage() {
   }
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen oath-wall-texture">
       <Navigation />
 
       <div className="container mx-auto px-4 py-8">
         {/* 页面标题和介绍 */}
         <div className="text-center mb-8">
-          <h1 className="font-serif text-4xl font-bold text-slate-900 mb-4">信用钻石案例库</h1>
+          <h1 className="font-serif text-4xl font-bold text-slate-900 mb-4">Oath Wall</h1>
           <p className="text-xl text-slate-600 mb-6 max-w-3xl mx-auto">
-            探索各种去中心化社会形态下的信用钻石案例，了解人们如何通过誓言建立信任，实现更高效、透明的协作方式。
+            Explore diverse credit diamond cases in decentralized society, discover how people build trust through oaths and achieve more efficient, transparent collaboration.
           </p>
         </div>
 
@@ -370,7 +368,7 @@ export default function DiamondCasesPage() {
           <div className="relative flex-1">
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-slate-400" />
             <Input
-              placeholder="搜索案例名称、描述或标签..."
+              placeholder="Search case name, description or tags..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               className="pl-10"
@@ -379,10 +377,10 @@ export default function DiamondCasesPage() {
 
           <Select value={categoryFilter} onValueChange={setCategoryFilter}>
             <SelectTrigger className="w-full md:w-48">
-              <SelectValue placeholder="类别筛选" />
+              <SelectValue placeholder="Filter by Category" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="all">全部类别</SelectItem>
+              <SelectItem value="all">All Categories</SelectItem>
               {categories.map((category) => (
                 <SelectItem key={category} value={category}>{category}</SelectItem>
               ))}
@@ -391,14 +389,14 @@ export default function DiamondCasesPage() {
 
           <Select value={sortBy} onValueChange={setSortBy}>
             <SelectTrigger className="w-full md:w-48">
-              <SelectValue placeholder="排序方式" />
+              <SelectValue placeholder="Sort By" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="credit_high">信用值从高到低</SelectItem>
-              <SelectItem value="credit_low">信用值从低到高</SelectItem>
-              <SelectItem value="newest">最新创建</SelectItem>
-              <SelectItem value="oldest">最早创建</SelectItem>
-              <SelectItem value="endorsements">背书数量</SelectItem>
+              <SelectItem value="credit_high">Credit Value: High to Low</SelectItem>
+              <SelectItem value="credit_low">Credit Value: Low to High</SelectItem>
+              <SelectItem value="newest">Newest</SelectItem>
+              <SelectItem value="oldest">Oldest</SelectItem>
+              <SelectItem value="endorsements">Most Endorsed</SelectItem>
             </SelectContent>
           </Select>
         </div>
@@ -408,12 +406,12 @@ export default function DiamondCasesPage() {
           <div className="flex flex-wrap gap-2 mb-6">
             {searchTerm && (
               <Badge variant="secondary" className="cursor-pointer" onClick={() => setSearchTerm("")}>
-                搜索: {searchTerm} ×
+                Search: {searchTerm} ×
               </Badge>
             )}
             {categoryFilter !== "all" && (
               <Badge variant="secondary" className="cursor-pointer" onClick={() => setCategoryFilter("all")}>
-                类别: {categoryFilter} ×
+                Category: {categoryFilter} ×
               </Badge>
             )}
           </div>
@@ -423,8 +421,8 @@ export default function DiamondCasesPage() {
         {filteredCases.length === 0 ? (
           <div className="text-center py-12">
             <Filter className="h-12 w-12 text-slate-300 mx-auto mb-4" />
-            <h3 className="text-lg font-medium text-slate-900 mb-2">没有找到匹配的案例</h3>
-            <p className="text-slate-500 mb-4">尝试调整搜索条件</p>
+            <h3 className="text-lg font-medium text-slate-900 mb-2">No matching cases found</h3>
+            <p className="text-slate-500 mb-4">Try adjusting search criteria</p>
             <Button
               variant="outline"
               onClick={() => {
@@ -432,7 +430,7 @@ export default function DiamondCasesPage() {
                 setCategoryFilter("all")
               }}
             >
-              清除所有筛选
+              Clear All Filters
             </Button>
           </div>
         ) : (

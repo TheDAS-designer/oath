@@ -8,35 +8,35 @@ export default function HomePage() {
   const features = [
     {
       icon: Shield,
-      title: "超额抵押誓言",
-      description: "通过抵押稳定币和SWEAR代币来发起誓言，确保承诺的可信度",
+      title: "Over-collateralized Oaths",
+      description: "Create oaths by staking stablecoins and OATH tokens to ensure commitment credibility",
       color: "text-blue-600",
     },
     {
       icon: Gavel,
-      title: "AI智能仲裁",
-      description: "结合人工智能和人工仲裁，公正高效地验证誓言完成情况",
+      title: "AI-Powered Arbitration",
+      description: "Combine AI and human arbitration for fair and efficient oath completion verification",
       color: "text-amber-600",
     },
     {
       icon: Trophy,
-      title: "信用NFT积累",
-      description: "完成誓言获得NFT证书，积累链上信用记录，降低未来成本",
+      title: "Credit SBT Accumulation",
+      description: "Earn SBT certificates for completed oaths, build on-chain credit history, reduce future costs",
       color: "text-green-600",
     },
     {
       icon: Users,
-      title: "社区监督",
-      description: "去中心化的举报和监督机制，确保平台的公正性和透明度",
+      title: "Community Oversight",
+      description: "Decentralized reporting and monitoring mechanisms ensure platform fairness and transparency",
       color: "text-purple-600",
     },
   ]
 
   const stats = [
-    { label: "总誓言数", value: "0", icon: Shield },
-    { label: "完成率", value: "0%", icon: CheckCircle },
-    { label: "总抵押额", value: "$0", icon: Lock },
-    { label: "活跃用户", value: "0", icon: Users },
+    { label: "Total Oaths", value: "0", icon: Shield },
+    { label: "Success Rate", value: "0%", icon: CheckCircle },
+    { label: "Total Collateral", value: "$0", icon: Lock },
+    { label: "Active Users", value: "0", icon: Users },
   ]
 
   return (
@@ -48,26 +48,26 @@ export default function HomePage() {
         <div className="container mx-auto text-center">
           <div className="max-w-4xl mx-auto">
             <h1 className="font-serif text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-blue-900 to-amber-600 bg-clip-text text-transparent">
-              构建去中心化社会的
+              Building Trust Infrastructure
               <br />
-              信任基石
+              for Decentralized Society
             </h1>
             <p className="text-xl text-slate-600 mb-8 leading-relaxed">
-              通过誓言积累信用，让承诺变得可验证、可量化、可复用。
+              Build credit through oaths, making commitments verifiable, quantifiable, and reusable.
               <br />
-              在区块链上建立真正的信任机制，减少交易摩擦，促进诚信社会。
+              Establish genuine trust mechanisms on blockchain, reduce transaction friction, promote integrity.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" className="bg-gradient-to-r from-blue-900 to-teal-700 text-white hover:opacity-90">
-                立即发起誓言
+              <Button size="lg" className="bg-gradient-to-r from-blue-900 to-teal-700 text-white hover:opacity-90 shadow-xl">
+                Create Oath Now
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
               <Button
                 size="lg"
                 variant="outline"
-                className="border-blue-200 text-blue-900 hover:bg-blue-50 bg-transparent"
+                className="border-blue-200 text-blue-900 hover:bg-blue-50 bg-transparent shadow-lg"
               >
-                了解更多
+                Learn More
               </Button>
             </div>
           </div>
@@ -98,9 +98,9 @@ export default function HomePage() {
       <section className="py-20 px-4">
         <div className="container mx-auto">
           <div className="text-center mb-16">
-            <h2 className="font-serif text-4xl font-bold mb-4 text-slate-900">平台核心功能</h2>
+            <h2 className="font-serif text-4xl font-bold mb-4 text-slate-900">Core Platform Features</h2>
             <p className="text-xl text-slate-600 max-w-2xl mx-auto">
-              通过创新的区块链技术和智能合约，构建可信的去中心化信用体系
+              Build a trusted decentralized credit system through innovative blockchain technology and smart contracts
             </p>
           </div>
 
@@ -134,45 +134,45 @@ export default function HomePage() {
       <section className="py-20 px-4 bg-gradient-to-br from-blue-50 to-slate-50">
         <div className="container mx-auto">
           <div className="text-center mb-16">
-            <h2 className="font-serif text-4xl font-bold mb-4 text-slate-900">应用场景</h2>
+            <h2 className="font-serif text-4xl font-bold mb-4 text-slate-900">Use Cases</h2>
             <p className="text-xl text-slate-600 max-w-2xl mx-auto">
-              从Web3项目到日常生活，誓言平台可以应用于各种需要信任的场景
+              From Web3 projects to daily life, Oath platform applies to various scenarios requiring trust
             </p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
             <Card className="shadow-lg hover:shadow-xl transition-shadow">
               <CardHeader>
-                <Badge className="w-fit mb-2 bg-blue-100 text-blue-800">Web3项目</Badge>
-                <CardTitle>项目方承诺</CardTitle>
+                <Badge className="w-fit mb-2 bg-blue-100 text-blue-800">Web3 Projects</Badge>
+                <CardTitle>Project Commitments</CardTitle>
               </CardHeader>
               <CardContent>
                 <CardDescription className="text-base">
-                  项目方通过超额抵押承诺项目维护期限，获得用户信任，完成后获得信用NFT
+                  Project teams stake collateral to commit to maintenance periods, earn user trust, and receive credit SBTs upon completion
                 </CardDescription>
               </CardContent>
             </Card>
 
             <Card className="shadow-lg hover:shadow-xl transition-shadow">
               <CardHeader>
-                <Badge className="w-fit mb-2 bg-green-100 text-green-800">生活服务</Badge>
-                <CardTitle>外卖配送</CardTitle>
+                <Badge className="w-fit mb-2 bg-green-100 text-green-800">Life Services</Badge>
+                <CardTitle>Food Delivery</CardTitle>
               </CardHeader>
               <CardContent>
                 <CardDescription className="text-base">
-                  外卖员抵押少量资金承诺准时配送，通过多签验证完成，积累配送信用
+                  Delivery workers stake small amounts to commit to timely delivery, verified through multi-sig, building delivery credit
                 </CardDescription>
               </CardContent>
             </Card>
 
             <Card className="shadow-lg hover:shadow-xl transition-shadow">
               <CardHeader>
-                <Badge className="w-fit mb-2 bg-purple-100 text-purple-800">商业合作</Badge>
-                <CardTitle>商业承诺</CardTitle>
+                <Badge className="w-fit mb-2 bg-purple-100 text-purple-800">Business Cooperation</Badge>
+                <CardTitle>Business Commitments</CardTitle>
               </CardHeader>
               <CardContent>
                 <CardDescription className="text-base">
-                  企业间合作承诺，通过智能合约和仲裁机制确保履约，建立商业信用
+                  Inter-enterprise cooperation commitments, ensure fulfillment through smart contracts and arbitration, build business credit
                 </CardDescription>
               </CardContent>
             </Card>
@@ -183,12 +183,12 @@ export default function HomePage() {
       {/* CTA Section */}
       <section className="py-20 px-4 bg-gradient-to-r from-blue-900 to-teal-700 text-white">
         <div className="container mx-auto text-center">
-          <h2 className="font-serif text-4xl font-bold mb-6">开始构建您的链上信用</h2>
+          <h2 className="font-serif text-4xl font-bold mb-6">Start Building Your On-Chain Credit</h2>
           <p className="text-xl mb-8 text-blue-100 max-w-2xl mx-auto">
-            加入誓言平台，通过承诺和履约建立可信的数字身份， 在去中心化世界中获得更多机会和信任。
+            Join the Oath platform, build a trusted digital identity through commitments and fulfillment, gain more opportunities and trust in the decentralized world.
           </p>
-          <Button size="lg" variant="secondary" className="bg-white text-blue-900 hover:bg-blue-50">
-            立即开始
+          <Button size="lg" variant="secondary" className="bg-white text-blue-900 hover:bg-blue-50 shadow-xl">
+            Get Started
             <ArrowRight className="ml-2 h-5 w-5" />
           </Button>
         </div>
@@ -204,7 +204,7 @@ export default function HomePage() {
               </div>
               <span className="font-serif text-xl font-bold">Oath</span>
             </div>
-            <div className="text-slate-400 text-sm">© 2025 Oath Platform. 构建去中心化社会的信任基石.</div>
+            <div className="text-slate-400 text-sm">© 2025 Oath Platform. Building trust infrastructure for decentralized society.</div>
           </div>
         </div>
       </footer>

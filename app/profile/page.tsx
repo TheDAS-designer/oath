@@ -12,7 +12,7 @@ import { User, Settings, ExternalLink, Copy, Check } from "lucide-react"
 import type { OathNFT } from "@/lib/types"
 import Link from "next/link"
 
-// 模拟用户数据
+// Mock user data
 const mockUser = {
   address: "0x1234567890123456789012345678901234567890",
   creditScore: 2450,
@@ -20,50 +20,50 @@ const mockUser = {
   totalStaked: 45000,
   nftCount: 3,
   joinedAt: new Date("2024-01-15"),
-  rank: "专家",
+  rank: "Expert",
   nextLevelScore: 5000,
 }
 
-// 模拟信用历史数据
+// Mock credit history data
 const mockCreditHistory = [
   {
     id: "1",
     type: "gain" as const,
     amount: 500,
-    reason: "成功完成誓言",
-    oathTitle: "DeFi项目维护承诺",
+    reason: "Successfully completed oath",
+    oathTitle: "DeFi Project Maintenance Commitment",
     timestamp: new Date("2024-12-01"),
-    details: "按时完成项目维护，获得用户好评",
+    details: "Completed project maintenance on time, received positive user feedback",
   },
   {
     id: "2",
     type: "bonus" as const,
     amount: 100,
-    reason: "连续完成奖励",
+    reason: "Consecutive completion bonus",
     timestamp: new Date("2024-11-28"),
-    details: "连续完成5个誓言，获得额外奖励",
+    details: "Completed 5 consecutive oaths, received additional reward",
   },
   {
     id: "3",
     type: "gain" as const,
     amount: 200,
-    reason: "完成服务交付",
-    oathTitle: "外卖配送服务",
+    reason: "Service delivery completed",
+    oathTitle: "Food Delivery Service",
     timestamp: new Date("2024-11-25"),
-    details: "准时完成配送任务，客户满意度100%",
+    details: "Completed delivery tasks on time, 100% customer satisfaction",
   },
   {
     id: "4",
     type: "loss" as const,
     amount: -50,
-    reason: "轻微延迟扣分",
-    oathTitle: "智能合约审计",
+    reason: "Minor delay penalty",
+    oathTitle: "Smart Contract Audit",
     timestamp: new Date("2024-11-20"),
-    details: "审计报告提交略有延迟",
+    details: "Audit report submission slightly delayed",
   },
 ]
 
-// 使用之前定义的模拟NFT数据
+// Using previously defined mock NFT data
 const mockNFTs: OathNFT[] = [
   {
     tokenId: "1001",
@@ -71,14 +71,14 @@ const mockNFTs: OathNFT[] = [
     creditValue: 15000,
     mintedAt: new Date("2024-01-20"),
     metadata: {
-      title: "DeFi项目维护大师",
-      description: "成功维护DeFi项目2年，展现了卓越的项目管理能力和技术实力",
+      title: "DeFi Project Maintenance Master",
+      description: "Successfully maintained DeFi project for 2 years, demonstrating excellent project management skills and technical expertise",
       image: "/nft/defi-master.png",
       attributes: [
-        { trait_type: "类型", value: "项目承诺" },
-        { trait_type: "持续时间", value: "730天" },
-        { trait_type: "抵押金额", value: "$75,000" },
-        { trait_type: "稀有度", value: "传奇" },
+        { trait_type: "Type", value: "Project Commitment" },
+        { trait_type: "Duration", value: "730 days" },
+        { trait_type: "Collateral Amount", value: "$75,000" },
+        { trait_type: "Rarity", value: "Legendary" },
       ],
     },
   },
@@ -88,14 +88,14 @@ const mockNFTs: OathNFT[] = [
     creditValue: 2500,
     mintedAt: new Date("2024-12-01"),
     metadata: {
-      title: "安全审计专家",
-      description: "高质量完成智能合约安全审计，保障了项目的安全性",
+      title: "Security Audit Expert",
+      description: "High-quality completion of smart contract security audit, ensuring project security",
       image: "/nft/audit-expert.png",
       attributes: [
-        { trait_type: "类型", value: "商业承诺" },
-        { trait_type: "持续时间", value: "15天" },
-        { trait_type: "抵押金额", value: "$7,500" },
-        { trait_type: "稀有度", value: "稀有" },
+        { trait_type: "Type", value: "Business Commitment" },
+        { trait_type: "Duration", value: "15 days" },
+        { trait_type: "Collateral Amount", value: "$7,500" },
+        { trait_type: "Rarity", value: "Rare" },
       ],
     },
   },
@@ -122,12 +122,12 @@ export default function ProfilePage() {
       setAddressCopied(true)
       setTimeout(() => setAddressCopied(false), 2000)
     } catch (err) {
-      console.error("复制失败:", err)
+      console.error("Copy failed:", err)
     }
   }
 
   const formatDate = (date: Date) => {
-    return new Intl.DateTimeFormat("zh-CN", {
+    return new Intl.DateTimeFormat("en-US", {
       year: "numeric",
       month: "long",
       day: "numeric",
@@ -142,7 +142,7 @@ export default function ProfilePage() {
           <div className="flex justify-center items-center h-64">
             <div className="text-center">
               <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
-              <p className="text-slate-600">加载个人资料中...</p>
+              <p className="text-slate-600">Loading profile...</p>
             </div>
           </div>
         </div>
@@ -158,12 +158,12 @@ export default function ProfilePage() {
         {/* 页面标题 */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
           <div>
-            <h1 className="font-serif text-3xl font-bold text-slate-900 mb-2">个人资料</h1>
-            <p className="text-slate-600">管理您的信用记录和NFT收藏</p>
+            <h1 className="font-serif text-3xl font-bold text-slate-900 mb-2">Profile</h1>
+            <p className="text-slate-600">Manage your credit records and NFT collection</p>
           </div>
           <Button variant="outline" className="mt-4 md:mt-0 bg-transparent">
             <Settings className="h-4 w-4 mr-2" />
-            设置
+            Settings
           </Button>
         </div>
 
@@ -172,14 +172,14 @@ export default function ProfilePage() {
           <CardHeader>
             <CardTitle className="flex items-center space-x-2">
               <User className="h-6 w-6 text-blue-600" />
-              <span>基本信息</span>
+              <span>Basic Information</span>
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="flex flex-col md:flex-row md:items-center md:justify-between">
               <div className="space-y-2">
                 <div>
-                  <p className="text-sm text-slate-500">钱包地址</p>
+                  <p className="text-sm text-slate-500">Wallet Address</p>
                   <div className="flex items-center space-x-2">
                     <code className="text-sm font-mono bg-slate-100 px-2 py-1 rounded">
                       {user.address.slice(0, 10)}...{user.address.slice(-8)}
@@ -193,12 +193,12 @@ export default function ProfilePage() {
                   </div>
                 </div>
                 <div>
-                  <p className="text-sm text-slate-500">加入时间</p>
+                  <p className="text-sm text-slate-500">Joined</p>
                   <p className="font-medium">{formatDate(user.joinedAt)}</p>
                 </div>
               </div>
               <div className="mt-4 md:mt-0">
-                <Badge className="bg-blue-100 text-blue-800">等级: {user.rank}</Badge>
+                <Badge className="bg-blue-100 text-blue-800">Level: {user.rank}</Badge>
               </div>
             </div>
           </CardContent>
@@ -222,9 +222,9 @@ export default function ProfilePage() {
             {/* 最新NFT */}
             <div>
               <div className="flex justify-between items-center mb-6">
-                <h2 className="font-serif text-2xl font-bold text-slate-900">最新NFT</h2>
+                <h2 className="font-serif text-2xl font-bold text-slate-900">Latest NFTs</h2>
                 <Button asChild variant="outline">
-                  <Link href="/gallery">查看全部</Link>
+                  <Link href="/gallery">View All</Link>
                 </Button>
               </div>
 
@@ -232,10 +232,10 @@ export default function ProfilePage() {
                 <Card className="oath-shadow">
                   <CardContent className="text-center py-12">
                     <User className="h-12 w-12 text-slate-300 mx-auto mb-4" />
-                    <h3 className="text-lg font-medium text-slate-900 mb-2">还没有NFT</h3>
-                    <p className="text-slate-500 mb-4">完成您的第一个誓言来获得NFT</p>
+                    <h3 className="text-lg font-medium text-slate-900 mb-2">No NFTs Yet</h3>
+                    <p className="text-slate-500 mb-4">Complete your first oath to earn an NFT</p>
                     <Button asChild>
-                      <Link href="/oaths/create">创建誓言</Link>
+                      <Link href="/oaths/create">Create Oath</Link>
                     </Button>
                   </CardContent>
                 </Card>
